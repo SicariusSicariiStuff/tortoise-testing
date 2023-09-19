@@ -402,13 +402,13 @@ class UnivNetGenerator(nn.Module):
         return audio
 
 from pathlib import Path
-STATIC_DIR = Path(__file__).parent.parent.parent/'static'
-assert STATIC_DIR.is_dir()
+STATIC_DIR = Path(__file__).parent / 'static'  # Assuming STATIC_DIR is a pathlib.Path object
+
 def BVGWithConf(fname: str):
-    json_config = json.loads(
-        (STATIC_DIR/fname).read_text()
-    )
+    json_config = json.loads((STATIC_DIR / fname).read_text())
     return lambda: BVGModel(AttrDict(json_config))
+
+
 
 @dataclass
 class VocType:
